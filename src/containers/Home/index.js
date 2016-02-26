@@ -1,32 +1,44 @@
 import React, { Component } from 'react';
-import DocumentMeta from 'react-document-meta';
 
 /* components */
-import { TopImage } from 'components/TopImage';
-import { Tools } from 'components/Tools';
-import { Projects } from 'components/Projects';
 
-const metaData = {
-  title: 'Redux Easy Boilerplate',
-  description: 'Start you project easy and fast with modern tools',
-  canonical: 'http://example.com/path/to/page',
-  meta: {
-    charset: 'utf-8',
-    name: {
-      keywords: 'react,meta,document,html,tags',
-    },
-  },
+import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+import {bindActionCreators} from 'redux';
+
+import {setTeam} from '../../actions/team';
+import {setChannel, buildSchedule, loadLiveVideo, showEPG, hideEPG} from '../../actions/livetv';
+import {EPG, LiveDetails, VideoPlayer} from '../../components';
+
+const mapStateToProps = (state) => {
+  return {
+    data: state.data.channels,
+    teams: state.data.teams
+  };
 };
 
-export class Home extends Component {
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({
+    setTeam
+
+  }, dispatch);
+};
+
+@connect(mapStateToProps, mapDispatchToProps)
+
+export default class Home extends Component {
+  static propTypes = {
+    data: PropTypes.object
+  };
+
   render() {
+    const styles = require('./LiveTv.scss');
+    const {data} = this.props;
+
     return (
-      <section>
-        <DocumentMeta {...metaData} />
-        <TopImage />
-        <Tools />
-        <Projects />
-      </section>
+      <div>
+        {data}
+      </div>
     );
   }
 }
