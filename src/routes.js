@@ -3,13 +3,14 @@ import { Route, IndexRoute } from 'react-router';
 
 /* containers */
 import { App } from 'containers/App';
+console.log(App);
 import { Home } from 'containers/Home';
-import { List } from 'containers/List';
+import { NewHome } from 'containers/newHome/NewHome';
 
 export default (
   <Route path="/" component={App}>
-    <IndexRoute component={Home} />
-    <Route path="list" component={List} />
+    <IndexRoute component={NewHome} />
+
     <Route status={404} path="*" component={Home} />
   </Route>
 );

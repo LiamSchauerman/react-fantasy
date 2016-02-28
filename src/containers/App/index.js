@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import './styles/app.scss';
 
 /* application components */
-import data from '../'
+
 export class App extends Component {
   static propTypes = {
     children: React.PropTypes.any,
@@ -13,9 +13,7 @@ export class App extends Component {
   render() {
     return (
       <section>
-        <Header />
         {this.props.children}
-        <Footer />
       </section>
     );
   }

@@ -1,44 +1,41 @@
-import React, { Component } from 'react';
-
-/* components */
-
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
-import {bindActionCreators} from 'redux';
 
-import {setTeam} from '../../actions/team';
-import {setChannel, buildSchedule, loadLiveVideo, showEPG, hideEPG} from '../../actions/livetv';
-import {EPG, LiveDetails, VideoPlayer} from '../../components';
-
-const mapStateToProps = (state) => {
-  return {
-    data: state.data.channels,
-    teams: state.data.teams
-  };
+/* global styles for app */
+//import './styles/app.scss';
+/* application components */
+import data from '../../data';
+import {setTeam} from 'actions/teams';
+const Bar = ({width, height}) => {
+  return (
+    <div style={{
+      backgroundColor: 'green',
+      width,
+      height
+    }}></div>
+  )
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({
-    setTeam
-
-  }, dispatch);
+const Team = ({teamName}) => {
+  return (
+    <div onClick={() => setTeam({})} style={{width: '200px', height: '50px', float: 'left'}}>
+      {teamName}
+    </div>
+  )
 };
+const Home = () => {
+  console.log('render HOME');
 
-@connect(mapStateToProps, mapDispatchToProps)
-
-export default class Home extends Component {
-  static propTypes = {
-    data: PropTypes.object
-  };
-
-  render() {
-    const styles = require('./LiveTv.scss');
-    const {data} = this.props;
-
-    return (
-      <div>
-        {data}
+  return (
+    <div style={{width: '800px'}}>
+      <Bar width="100px" height="20px"/>
+      <div style={{width: '100%'}}>
+        <Team teamName="Real Beal" />
+        <Team teamName="King and his Court" />
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
+
+export default Home;
+
+
